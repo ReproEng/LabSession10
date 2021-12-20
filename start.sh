@@ -1,5 +1,10 @@
 #!/bin/bash
 
+if [[ $# -ne 2 ]]; then
+    echo "Usage: $0 projectname imagename"
+    exit 
+fi
+
 project=$1
 image_name=$2
 res_path="output/${project}"
