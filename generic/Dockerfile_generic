@@ -27,3 +27,6 @@ WORKDIR /home/repro
 COPY --chown=repro artefacts /home/repro
 
 $META_APPEND
+
+ENTRYPOINT /home/repro/dispatch.sh
+
