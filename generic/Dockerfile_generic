@@ -24,4 +24,6 @@ RUN usermod -a -G staff repro
 USER repro
 WORKDIR /home/repro
 
+COPY --chown=repro artefacts /home/repro
+
 $META_APPEND

@@ -9,4 +9,5 @@ envsubst < "Dockerfile_generic" > "Dockerfile"
 
 # Move project-specific artefacts and generated Dockefile to output
 cp Dockerfile output
-cp -r project/files/* output
+mkdir -p -m 777 output/artefacts
+cp -r project/files/* output/artefacts

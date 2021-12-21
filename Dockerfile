@@ -33,4 +33,4 @@ COPY --chown=meta project/${project} /home/meta/project/
 RUN mkdir -p -m 777 output
 
 ENTRYPOINT /home/meta/build.sh
-#ENTRYPOINT /bin/bash
+
