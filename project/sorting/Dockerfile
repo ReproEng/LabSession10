@@ -1,4 +1,4 @@
-# Template Dockerfile that contains generic steps of building a container for reproduction packages
+# Docker container for a simple R setup
 
 # Copyright 2021, Wolfgang Mauerer <wolfgang.mauerer@othr.de>
 # Copyright 2021, Stefanie Scherzinger <stefanie.scherzinger@uni-passau.de>
@@ -14,23 +14,28 @@ ENV DEBIAN_FRONTEND noninteractive
 ENV LANG="C.UTF-8"
 ENV LC_ALL="C.UTF-8"
 
-# Install packages
+# Install required packages
 RUN apt-get update -qq && apt-get install -qq --no-install-recommends \
-		gettext \
+		build-essential \
+		ca-certificates \
+		nano \
 		r-base \
-		texlive-base \
+		r-cran-ggplot2 \
+		r-cran-tidyr \
+		r-cran-dplyr \
+		r-cran-stringr \
+		sudo \
+		zlib1g-dev
 
 # Add user
-RUN useradd -m -G sudo -s /bin/bash meta && echo "meta:meta" | chpasswd
-USER meta
-WORKDIR /home/meta
+RUN useradd -m -G sudo -s /bin/bash repro && echo "repro:repro" | chpasswd
+RUN usermod -a -G staff repro
+USER repro
+WORKDIR /home/repro
 
-COPY --chown=meta generic/build.sh /home/meta/build.sh
-RUN chmod +x build.sh
-COPY --chown=meta generic/Dockerfile_generic /home/meta/Dockerfile_generic
-ARG project
-COPY --chown=meta project/${project} /home/meta/project/
-RUN mkdir -p -m 777 output
+# Add res directory to container
+ADD --chown=repro:repro data data/
+ADD --chown=repro:repro *.r ./
 
-ENTRYPOINT /home/meta/build.sh
-#ENTRYPOINT /bin/bash
+RUN Rscript -e "install.packages('BiocManager')"
+RUN Rscript -e "BiocManager::install('rhdf5')"
