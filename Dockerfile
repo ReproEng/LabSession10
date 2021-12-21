@@ -18,7 +18,7 @@ ENV LC_ALL="C.UTF-8"
 RUN apt-get update -qq && apt-get install -qq --no-install-recommends \
 		gettext \
 		r-base \
-		texlive-base \
+		texlive-base 
 
 # Add user
 RUN useradd -m -G sudo -s /bin/bash meta && echo "meta:meta" | chpasswd
