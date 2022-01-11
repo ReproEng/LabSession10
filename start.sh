@@ -15,7 +15,7 @@ mkdir -p -m 777 $res_path
 
 # Build and run container with mounted output directory
 docker build --build-arg project=$project -t meta .
-docker run -it -v "$(pwd)"/${res_path}:/home/meta/output meta
+docker run -v "$(pwd)"/${res_path}:/home/meta/output meta
 
 # Build and save Docker image
 cd $res_path
