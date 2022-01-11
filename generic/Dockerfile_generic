@@ -16,7 +16,7 @@ ENV LC_ALL="C.UTF-8"
 
 # Install specified packages
 ARG packages
-RUN apt-get update -qq && apt-get install -qq --no-install-recommends texlive-latex-base $META_PACKAGES
+RUN apt-get update -qq && apt-get install -qq --no-install-recommends texlive-base texlive-latex-extra $META_PACKAGES
 
 # Add user
 RUN useradd -m -G sudo -s /bin/bash repro && echo "repro:repro" | chpasswd
