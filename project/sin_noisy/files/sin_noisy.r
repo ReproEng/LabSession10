@@ -4,7 +4,6 @@ library(ggplot2)
 library(reshape2)
 
 noise.level <- as.double(commandArgs(trailingOnly = TRUE)[1])
-noise.level
 
 sample.points <- as.integer(commandArgs(trailingOnly = TRUE)[2])
 
@@ -30,8 +29,5 @@ gen.noisy.df <- function(dat, noise.strength=0.2) {
 }
 
 fn.noisy <- gen.noisy.df(dat, noise.strength=noise.level)
-
-# Write results to stdout
-write.csv(fn.noisy[c("x","y.noisy")], stdout(), row.names = FALSE)
 
 ggplot(fn.noisy, aes(x=x, y=y.noisy)) + geom_point(size=0.2)

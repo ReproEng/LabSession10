@@ -28,5 +28,7 @@ COPY --chown=repro artefacts /home/repro
 
 $META_APPEND
 
+RUN chmod +x /home/repro/dispatch.sh
+
 ENTRYPOINT /home/repro/dispatch.sh
 

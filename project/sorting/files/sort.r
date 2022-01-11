@@ -23,7 +23,6 @@ perform.measurement <- function(file, algorithm, dataset, size) {
     rt <- system.time(froznicator(dat$value))
   }
   return(c(size, rt["elapsed"]))
-  #h5write(as.matrix(dat), file, str_c("/meas/", algorithm, "/", dataset))
 }
 write.measurement <- function(file, algorithm, dataset, size) {
   h5write(as.matrix(dat), file, str_c("/meas/", algorithm, "/", dataset))
@@ -40,11 +39,9 @@ read.data <- function(file, algorithm, dataset) {
   return(dat)
 }
 
-#################################################################
 create.file("repeng.h5")
 h5closeAll()
 file <- "repeng.h5"
-#h5ls("repeng.h5")
 
 alg <- c("froznicator", "hypersnort")
 ds <- c("foo", "βαρ", "baz")
@@ -98,7 +95,6 @@ h5closeAll()
 
 dat <- rbind(dat, dat2)
 
-head(dat)
 ggplot(dat, aes(x=size, y=runtime)) + geom_point(aes(shape=dataset, colour=algorithm))
 
 ggplot(dat, aes(x=size, y=runtime, colour=algorithm)) + geom_point() +
